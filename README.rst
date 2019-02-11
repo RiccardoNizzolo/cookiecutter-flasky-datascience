@@ -1,5 +1,5 @@
-cookiecutter-flask
-==================
+cookiecutter-datascience
+============================
 
 A Data Science template with flask, docker and jenkins for cookiecutter_.
 
@@ -20,11 +20,13 @@ You will be asked about your basic info (name, project name, app name, etc.). Th
 Features
 --------
 
-- Expose Restfull for each trained model
+- Expose Restfull API for each trained model
 - Modularization of the data science development process
-- Testing for the data science pipeline
-- Automatic model persistence with metadata
-- History of all trainded models with performance, commit and statistics
+- Automatic Testing for the data science pipeline
+- Model persistence with metadata
+- History of all trainded models with train/validation/test performance, commit id and statistics
+- Jenkins CI/CD Pipeline with models image building
+- Deploy models in docker containers
 - Flask-SQLAlchemy ready
 - Easy database migrations with Flask-Migrate
 - Configuration in environment variables, as per `The Twelve-Factor App <https://12factor.net/config>`_
