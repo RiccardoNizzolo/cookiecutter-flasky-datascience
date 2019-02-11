@@ -6,6 +6,11 @@ import os
 import shutil
 import sys
 
+PROJECT_DIRECTORY = os.path.realpath(os.path.curdir)
+
+def remove_file(filepath):
+    os.remove(os.path.join(PROJECT_DIRECTORY, filepath))
+
 
 def clean_extra_package_managment_files():
     """Removes either requirements files and folderor the Pipfile."""
@@ -33,3 +38,6 @@ def clean_extra_package_managment_files():
 
 if __name__ == '__main__':
     clean_extra_package_managment_files()
+
+    if 'Not open source' == '{{ cookiecutter.open_source_license }}':
+        remove_file('LICENSE')
