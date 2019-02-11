@@ -1,0 +1,14 @@
+version: '3.5'
+
+services:
+
+  {{cookiecutter.short_app_name}}-model-app:
+    image: {{cookiecutter.short_app_name}}webprod:latest
+    ports:
+      - 5006:5000
+    environment:
+      - APP_NAME={{cookiecutter.app_name}}
+      - PYTHONUNBUFFERED=1
+      - APP_SETTINGS=project.config.server_config.TestingConfig
+      - STARTUP_RETRAIN= False
+    entrypoint: "python manage.py run -h 0.0.0.0"

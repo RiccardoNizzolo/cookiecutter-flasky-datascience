@@ -1,0 +1,84 @@
+#!/usr/bin/env groovy
+
+/**
+ * Jenkinsfile
+ */
+pipeline {
+    agent any
+    options {
+        buildDiscarder(
+            // Only keep the 10 most recent builds
+            logRotator(numToKeepStr:'10'))
+    }
+    environment {
+        projectName = ''
+        emailTo = ''
+        emailFrom = ''
+        VIRTUAL_ENV = "${env.WORKSPACE}/venv"
+    }
+
+    stages {
+
+
+
+
+        stage ('Build image and test') {
+            steps {
+                git 'https://github.com/RiccardoNizzolo/data_science_ci'
+                sh 'ls'
+                sh 'docker image build -t "{{cookiecutter.short_app_name}}web:1" -f docker/Dockerfile .'
+                sh 'docker image build -t "{{cookiecutter.short_app_name}}web:latest" -f docker/Dockerfile .'
+                //sh 'docker-compose -f docker/docker-compose-dev.yml run web python manage.py test'
+                //sh label: '', script: 'cd docker && docker-compose -f docker-compose-dev.yml build'
+
+                //sh label: '', script: 'cd docker && docker-compose -f docker-compose-dev.yml run {{cookiecutter.short_app_name}}web python manage.py test'
+            }
+        }
+        stage ('train') {
+            steps {
+                //
+
+                sh 'docker-compose -f docker/docker-compose-model_build.yml up -d'
+
+                timeout(20) {
+                    waitUntil {
+                       script {
+                         def r = sh script: 'wget -q http://docker_{{cookiecutter.short_app_name}}-model-builder_1:5000', returnStatus: true
+                         return (r == 0);
+                       }
+                    }
+                }
+                sh 'docker commit docker_model-builder_1 {{cookiecutter.short_app_name}}webprod:latest'
+                sh 'docker container stop $( docker ps -q --filter="name=model-builder*")'
+
+            }
+
+
+        }
+
+                stage ('deploy') {
+            steps {
+                //
+
+                sh 'docker-compose -f docker/docker-compose-model_deploy.yml up -d'
+
+                timeout(20) {
+                    waitUntil {
+                       script {
+                         def r = sh script: 'wget -q http://docker_{{cookiecutter.short_app_name}}-model-app_1:5000', returnStatus: true
+                         return (r == 0);
+                       }
+                    }
+                }
+
+
+            }
+
+
+        }
+
+
+    }
+
+
+}

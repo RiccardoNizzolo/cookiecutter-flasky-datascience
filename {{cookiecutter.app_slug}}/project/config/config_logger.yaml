@@ -1,0 +1,28 @@
+
+
+Logging:
+  version: 1
+  disable_existing_loggers: False
+  formatters:
+      detail:
+          format: "%(asctime)s - %(name)s - %(message)s"
+      onlymessage:
+          format: "%(message)s"
+
+  handlers:
+      file_handler:
+          class: logging.FileHandler
+          level: DEBUG
+          formatter: detail
+          filename: ./log.log
+          mode: w
+  stream_handler:
+    class: logging.StreamHandler
+    level: DEBUG
+    formatter: detail
+    stream: ext://sys.stdout
+
+  root:
+    level: DEBUG
+    handlers:
+      - stream_handler

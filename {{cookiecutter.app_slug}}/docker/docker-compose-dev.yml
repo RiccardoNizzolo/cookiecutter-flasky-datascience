@@ -1,0 +1,32 @@
+version: '3.5'
+
+services:
+
+  {{cookiecutter.short_app_name}}-web:
+    image: {{cookiecutter.short_app_name}}web:latest
+    ports:
+      - 5002:5000
+    environment:
+      - APP_NAME={{cookiecutter.app_name}}
+      - FLASK_DEBUG=1
+      - PYTHONUNBUFFERED=1
+      - APP_SETTINGS=project.config.server_config.DevelopmentConfig
+      - DATABASE_URL=postgres://postgres:postgres@web-db:5432/users_dev
+      - DATABASE_TEST_URL=postgres://postgres:postgres@web-db:5432/users_test
+      - SECRET_KEY=change_me_in_prod
+      - VERTICA_HOST=docker_datadb_1
+    depends_on:
+      - web-db
+  {{cookiecutter.short_app_name}}-web-db:
+    container_name: web-db
+    build:
+      context: ./db
+      dockerfile: Dockerfile
+    ports:
+      - 5435:5432
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+
+
+

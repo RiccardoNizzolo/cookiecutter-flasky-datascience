@@ -1,0 +1,18 @@
+version: '3.5'
+
+services:
+
+  {{cookiecutter.short_app_name}}-model-builder:
+    image: {{cookiecutter.short_app_name}}web:latest
+    ports:
+      - 5005:5000
+    environment:
+      - APP_NAME={{cookiecutter.app_name}}
+      - PYTHONUNBUFFERED=1
+      - APP_SETTINGS=project.config.server_config.TestingConfig
+      - DATABASE_URL=postgres://postgres:postgres@web-db:5432/users_dev
+      - DATABASE_TEST_URL=postgres://postgres:postgres@web-db:5432/users_test
+      - SECRET_KEY=change_me_in_prod
+      - VERTICA_HOST=docker_datadb_1
+      - STARTUP_RETRAIN= True
+    entrypoint: "python manage.py run -h 0.0.0.0"

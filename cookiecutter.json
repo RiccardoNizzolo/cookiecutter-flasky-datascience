@@ -1,0 +1,10 @@
+{
+    "app_name": "Data science Flask Skeleton",
+    "short_app_name":"dsfk",
+    "app_slug": "{{ cookiecutter.app_name.lower()|replace(' ', '_')|replace('-', '_') }}",
+    "_copy_without_render": [
+        "*.html"
+    ]
+
+
+}

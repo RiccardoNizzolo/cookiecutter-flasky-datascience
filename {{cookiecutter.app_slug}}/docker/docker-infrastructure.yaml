@@ -1,0 +1,19 @@
+version: '3'
+
+services:
+  jenkins:
+    build:
+      context: .
+      dockerfile: DockerfileJenkins
+    ports:
+      - "8080:8080"
+      - "50000:50000"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+#      - /home/ubuntu/volumes/jenkins-data:/var/jenkins_home \
+  datadb:
+    image: jbfavre/vertica:9.0.1-5_centos-7
+    ports:
+      - "5433:5433"
+#    volumes:
+#      - ../data/data_db:/home/dbadmin/docker
