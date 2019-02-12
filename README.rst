@@ -1,7 +1,7 @@
-cookiecutter-datascience
-============================
+cookiecutter-flasky-datascience
+=================================
 
-A Data Science template with flask, docker and jenkins for cookiecutter_.
+Template application for deploy data science models as Restfull API. Build with flask, docker, jenkins and cookiecutter_.
 
 .. _cookiecutter: https://github.com/audreyr/cookiecutter
 
