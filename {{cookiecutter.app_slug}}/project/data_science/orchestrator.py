@@ -1,5 +1,5 @@
 import logging
-from werkzeug.utils import import_string
+from werkzeug.utils import import_string, ImportStringError
 import pandas as pd
 
 from decorators.decorators import  timer
@@ -13,16 +13,28 @@ log=logging.getLogger(__name__)
 
 class Orchestrator():
 
+    BASE_CLASSPATH='project.data_science.'
+
     def __init__(self, seed=None):
         self.meta=seed
-        base=seed.get('base_path')
-        self.data_inteface=import_string(base + self.meta.get('data_inteface'))()
-        self.target_generator=import_string(base + self.meta.get('target_generator'))()
-        self.feat_eng=import_string(base + self.meta.get('feat_eng'))()
-        self.model=import_string(base + self.meta.get('model'))()
-        self.train_test_split = import_string(base + self.meta.get('train_test_split'))
-        self.score_metric =  import_string(self.meta.get('score_metric'))
+        self.data_inteface=self.import_from_string(self.meta.get('data_inteface'))()
+        self.target_generator=self.import_from_string(self.BASE_CLASSPATH + self.meta.get('target_generator'))()
+        self.feat_eng=self.import_from_string(self.BASE_CLASSPATH + self.meta.get('feat_eng'))()
+        self.model=self.import_from_string(self.BASE_CLASSPATH + self.meta.get('model'))()
+        self.train_test_split = self.import_from_string(self.BASE_CLASSPATH + self.meta.get('train_test_split'))
+        self.score_metric =  self.import_from_string(self.meta.get('score_metric'))
         return
+
+    def import_from_string(self,str):
+
+        try:
+            return import_string(self.BASE_CLASSPATH+str)
+        except ImportStringError:
+            pass
+        try:
+            return  import_string(str)
+        except ImportStringError:
+            raise ImportStringError("The object doesn't have such attribute") from None
 
     @timer
     def build(self, data_limit=None):

@@ -1,7 +1,6 @@
 
 
 scaled_regression:
-  base_path: 'project.data_science.'
   data_inteface: 's1_data_connection.data_connection_ex.LocalData'
   target_generator: 's2_target_generators.target_gen_ex.TargetGenSimple'
   feat_eng: 's3_feature_eng.feat_eng_ex.FeatEngScaling'
@@ -10,7 +9,6 @@ scaled_regression:
   score_metric: 'sklearn.metrics.mean_squared_error'
 
 feateng_regression:
-  base_path: 'project.data_science.'
   data_inteface: 's1_data_connection.data_connection_ex.LocalData'
   target_generator: 's2_target_generators.target_gen_ex.TargetGenSimple'
   feat_eng: 's3_feature_eng.feat_eng_ex.FeatEngAddColumns'
@@ -19,7 +17,6 @@ feateng_regression:
   score_metric: 'sklearn.metrics.mean_squared_error'
 
 simple_regression:
-  base_path: 'project.data_science.'
   data_inteface: 's1_data_connection.data_connection_ex.LocalData'
   target_generator: 's2_target_generators.target_gen_ex.TargetGenSimple'
   feat_eng: 's3_feature_eng.feat_eng_ex.FeatEngIdentity'
