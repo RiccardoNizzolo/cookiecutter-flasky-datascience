@@ -28,6 +28,7 @@ pipeline {
                 sh 'ls'
                 sh 'docker image build -t "{{cookiecutter.short_app_name}}web:1" -f docker/Dockerfile .'
                 sh 'docker image build -t "{{cookiecutter.short_app_name}}web:latest" -f docker/Dockerfile .'
+                sh 'docker run -i "{{cookiecutter.short_app_name}}web:latest" python manage.py test'
             }
         }
         stage ('train') {
