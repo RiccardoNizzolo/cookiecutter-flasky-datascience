@@ -24,14 +24,10 @@ pipeline {
 
         stage ('Build image and test') {
             steps {
-                git 'https://github.com/RiccardoNizzolo/data_science_ci'
+
                 sh 'ls'
                 sh 'docker image build -t "{{cookiecutter.short_app_name}}web:1" -f docker/Dockerfile .'
                 sh 'docker image build -t "{{cookiecutter.short_app_name}}web:latest" -f docker/Dockerfile .'
-                //sh 'docker-compose -f docker/docker-compose-dev.yml run web python manage.py test'
-                //sh label: '', script: 'cd docker && docker-compose -f docker-compose-dev.yml build'
-
-                //sh label: '', script: 'cd docker && docker-compose -f docker-compose-dev.yml run {{cookiecutter.short_app_name}}web python manage.py test'
             }
         }
         stage ('train') {
