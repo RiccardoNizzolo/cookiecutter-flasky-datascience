@@ -39,7 +39,7 @@ pip-log.txt
 task_todo
 pip-delete-this-directory.txt
 
-data/*
+
 # Unit test / coverage reports
 htmlcov/
 .tox/

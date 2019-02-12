@@ -29,7 +29,7 @@ RUN pip install -r requirements.txt
 
 # add app
 COPY project /usr/src/app/project
-COPY data/*xlsx /usr/src/app/data
+COPY data/*xlsx /usr/src/app/data/
 COPY ./.git /usr/src/app/.git
 COPY __init__.py /usr/src/app/
 COPY *.py /usr/src/app/
