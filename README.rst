@@ -20,13 +20,12 @@ You will be asked about your basic info (name, project name, app name, etc.). Th
 Features
 --------
 
-- Expose Restfull API for each trained model
-- Modularization of the data science development process
+- Restfull API for each trained model
+- Modularized design to avoid information-leaks and set-up a valid experiment
 - Automatic Testing for the data science pipeline
-- Model persistence with metadata
-- History of all trainded models with train/validation/test performance, commit id and statistics
+- History of all trained models with train/validation/test performance, commit id and other statistics
 - Jenkins CI/CD Pipeline with models image building
-- Deploy models in docker containers
+- Deploy models as Docker containers
 - Flask-SQLAlchemy ready
 - Easy database migrations with Flask-Migrate
 - Configuration in environment variables, as per `The Twelve-Factor App <https://12factor.net/config>`_

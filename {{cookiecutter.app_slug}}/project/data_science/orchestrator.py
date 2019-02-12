@@ -81,7 +81,7 @@ class Orchestrator():
         try:
             pd.testing.assert_series_equal(online_data.dtypes, self.data_interface)
         except:
-            TypeError ('prediction data are not compatible with traini data. check /<modelname>/data')
+            TypeError ('prediction data are not compatible with train data. check /<modelname>/data')
         log.debug('input production data shape: %s', online_data.shape)
         X = self.feat_eng.transform(online_data)
         log.debug('generated engineered train data. shape: %s',  X.shape)
