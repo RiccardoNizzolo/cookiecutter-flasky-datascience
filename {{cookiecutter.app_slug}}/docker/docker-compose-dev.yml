@@ -16,7 +16,7 @@ services:
       - SECRET_KEY=change_me_in_prod
       - VERTICA_HOST=docker_datadb_1
     depends_on:
-      - web-db
+      - {{cookiecutter.short_app_name}}-web-db
   {{cookiecutter.short_app_name}}-web-db:
     container_name: web-db
     build:

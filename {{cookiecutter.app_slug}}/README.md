@@ -3,7 +3,7 @@
 ## Getting Started with Jenkis and Docker
 ### If you have a Jenkins server
 - Check that a docker daemon is installed on Jenkis server
-- Create a new pipeline from SCM and link the Jenkinsfile and launch it
+- Create a new pipeline from SCM, link the Jenkinsfile and launch the Jenkinsjob
 
 ### If you DO NOT have a Jenkis server
 Launch a Jenkins server on local:
@@ -11,6 +11,37 @@ Launch a Jenkins server on local:
 docker-compose -f docker/docker-infrastructure.yaml up
 ```
 create a new pipeline from SCM and link the Jenkinsfile and launch it
+
+## Getting Started with Docker but without Jenkins
+
+Update the environment variables in *docker/docker-compose-dev.yml*, and then build the images and spin up the containers:
+
+```sh
+$ docker-compose -fdocker/docker-compose-dev.yml up -d --build
+```
+
+
+Access the application at the address [http://localhost:5002/](http://localhost:5002/)
+
+### Testing
+
+Test without coverage:
+
+```sh
+$ docker-compose -fdocker/docker-compose-dev.yml run web python manage.py test
+```
+
+Test with coverage:
+
+```sh
+$ docker-compose -fdocker/docker-compose-dev.yml run web python manage.py cov
+```
+
+Lint:
+
+```sh
+$ docker-compose -fdocker/docker-compose-dev.yml run web flake8 project
+```
 
 ## Getting Started without Jenkis and Docker
 
