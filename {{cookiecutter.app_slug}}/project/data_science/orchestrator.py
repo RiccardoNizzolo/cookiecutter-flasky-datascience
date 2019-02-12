@@ -22,12 +22,19 @@ class Orchestrator():
         self.model=import_string(base + self.meta.get('model'))()
         self.train_test_split = import_string(base + self.meta.get('train_test_split'))
         self.score_metric =  import_string(self.meta.get('score_metric'))
-
+        return
 
     @timer
-    def build(self):
+    def build(self, data_limit=None):
+        """
+        Build the model
+        :param data_limit:
+        :return:
+        """
 
         data=self.data_inteface.get_training_data()
+        if data_limit is not None:
+            data=data.head(data_limit)
 
         log.debug('loaded training data. shape: %s',data.shape)
         self.meta.update({'training_data_shape':str(data.shape)})
@@ -55,7 +62,7 @@ class Orchestrator():
         self.meta.update({'test_score':self.score_metric(y_test,y_test_pred)})
         log.info('score on test set %s', self.meta.get('test_performance'))
 
-
+        return
 
     def predict(self,online_data):
 

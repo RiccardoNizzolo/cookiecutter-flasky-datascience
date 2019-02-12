@@ -6,7 +6,8 @@ from project.decorators.singleton import Singleton
 from project.data_science import ds_config
 from git.repo import Repo
 import datetime
-
+import logging
+log=logging.getLogger(__name__)
 
 
 
@@ -35,12 +36,14 @@ class DataScienceModelsPersistor(metaclass=Singleton):
             self.build_models()
 
     def build_models(self):
-
+        log.info('Building models from scratch ...')
         models={}
         for model_name, seed in DataScienceOrcherstratorConfig().get_dict().items():
+            log.info('Start build model %s',model_name)
             orc = Orchestrator(seed)
             orc.build()
             models.update({model_name : orc})
+            log.info('Model %s created', model_name)
 
         self.models=models
 
@@ -52,7 +55,7 @@ class DataScienceModelsPersistor(metaclass=Singleton):
 
 
     def _load_models(self):
-
+        log.info('Loading persisted models from file %s',self.filename)
         with open(self.filename, 'rb') as output:
             models=pickle.load(output)
             self.models=models

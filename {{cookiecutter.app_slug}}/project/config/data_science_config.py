@@ -1,5 +1,5 @@
 import yaml
-from config.server_config import BaseConfig
+from project.config.server_config import BaseConfig
 import os
 
 
@@ -40,16 +40,17 @@ class DsDevelopmentConfig(DsBaseConfig):
     """Development configuration."""
     STARTUP_RETRAIN=os.environ.get(
         "STARTUP_RETRAIN", True)
-    VERTICA_USER=os.environ.get(
-        "VERTICA_USER", "dbadmin")
-    VERTICA_PASSWORD=os.environ.get(
-        "VERTICA_USER", "dbadmin")
-    VERTICA_HOST=os.environ.get(
-        "VERTICA_HOST", "localhost")
-    VERTICA_PORT=os.environ.get(
-        "VERTICA_PORT", 5433)
-    VERTICA_DB=os.environ.get(
-        "VERTICA_DB", 'docker')
+    DATA_FOLDER = os.environ.get("DATA_FOLDER",DsBaseConfig.BASE_PATH + '/data/')
+    DATADB_USER=os.environ.get(
+        "DATADB_USER", "dbadmin")
+    DATADB_PASSWORD=os.environ.get(
+        "DATADB_USER", "dbadmin")
+    DATADB_HOST=os.environ.get(
+        "DATADB_HOST", "localhost")
+    DATADB_PORT=os.environ.get(
+        "DATADB_PORT", 5433)
+    DATADB_DB=os.environ.get(
+        "DATADB_DB", 'docker')
 
 
 
@@ -57,30 +58,32 @@ class DsTestingConfig(DsBaseConfig):
     """Testing configuration."""
     STARTUP_RETRAIN = os.environ.get(
         "STARTUP_RETRAIN", False)
-    VERTICA_USER = os.environ.get(
-        "VERTICA_USER", "dbadmin")
-    VERTICA_PASSWORD = os.environ.get(
-        "VERTICA_USER", "dbadmin")
-    VERTICA_HOST = os.environ.get(
-        "VERTICA_HOST", "localhost")
-    VERTICA_PORT = os.environ.get(
-        "VERTICA_PORT", 5433)
-    VERTICA_DB = os.environ.get(
-        "VERTICA_DB", 'docker')
+    DATA_FOLDER = os.environ.get("DATA_FOLDER", DsBaseConfig.BASE_PATH + '/data/')
+    DATADB_USER = os.environ.get(
+        "DATADB_USER", "dbadmin")
+    DATADB_PASSWORD = os.environ.get(
+        "DATADB_USER", "dbadmin")
+    DATADB_HOST = os.environ.get(
+        "DATADB_HOST", "localhost")
+    DATADB_PORT = os.environ.get(
+        "DATADB_PORT", 5433)
+    DATADB_DB = os.environ.get(
+        "DATADB_DB", 'docker')
 
 
 class DsProductionConfig(DsBaseConfig):
     """Production configuration."""
     STARTUP_RETRAIN = os.environ.get(
         "STARTUP_RETRAIN", False)
-    VERTICA_USER = os.environ.get(
-        "VERTICA_USER")
-    VERTICA_PASSWORD = os.environ.get(
-        "VERTICA_USER")
-    VERTICA_HOST = os.environ.get(
-        "VERTICA_HOST")
-    VERTICA_PORT = os.environ.get(
-        "VERTICA_PORT")
-    VERTICA_DB = os.environ.get(
-        "VERTICA_DB")
+    DATA_FOLDER = os.environ.get("DATA_FOLDER")
+    DATADB_USER = os.environ.get(
+        "DATADB_USER")
+    DATADB_PASSWORD = os.environ.get(
+        "DATADB_USER")
+    DATADB_HOST = os.environ.get(
+        "DATADB_HOST")
+    DATADB_PORT = os.environ.get(
+        "DATADB_PORT")
+    DATADB_DB = os.environ.get(
+        "DATADB_DB")
 

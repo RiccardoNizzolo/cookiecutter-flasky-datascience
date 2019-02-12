@@ -1,5 +1,5 @@
 import logging
-log=logging.getLogger('console')
+log=logging.getLogger(__name__)
 
 def timer(f):
     import timeit

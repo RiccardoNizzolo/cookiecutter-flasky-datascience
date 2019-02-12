@@ -11,6 +11,7 @@ from logging.config import dictConfig
 class BaseConfig(object):
     """Base configuration."""
 
+
     APP_NAME = os.getenv("APP_NAME", "data_science_ci")
     BCRYPT_LOG_ROUNDS = 4
     DEBUG_TB_ENABLED = False
@@ -21,14 +22,6 @@ class BaseConfig(object):
     MODELS_PERSISTENCE_PATH=BASE_PATH + '/data/persisted_orchestrator/'
     LOGGING_CONFIG=BASE_PATH+'/project/config/config_logger.yaml'
     ORCHESTRATORS_SEED_FILE=BASE_PATH+'/project/data_science/orchestrator_seed.yaml'
-
-
-    def load_config(self):
-        with open(self.LOGGING_CONFIG, 'r') as stream:
-            try:
-                dictConfig(yaml.safe_load(stream))
-            except yaml.YAMLError as exc:
-                print(exc)
 
 
 
@@ -59,3 +52,14 @@ class ProductionConfig(BaseConfig):
     SQLALCHEMY_DATABASE_URI = os.environ.get("DATABASE_URL")
     WTF_CSRF_ENABLED = True
 
+
+
+def load_logger_config():
+    with open(BaseConfig.LOGGING_CONFIG, 'r') as stream:
+        try:
+            dictConfig(yaml.safe_load(stream))
+        except yaml.YAMLError as exc:
+            print(exc)
+
+
+load_logger_config()

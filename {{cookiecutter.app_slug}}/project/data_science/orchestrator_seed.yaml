@@ -1,19 +1,28 @@
 
 
-simple_regression:
+scaled_regression:
   base_path: 'project.data_science.'
-  data_inteface: 's1_data_connection.local_data.LocalData'
-  target_generator: 's2_target_generators.target_gen_identity.TargetGenIdentity'
-  feat_eng: 's3_feature_eng.feat_eng_scaling.ScalingFeatEng'
-  model: 's4_models.linear_reg.LinearReg'
+  data_inteface: 's1_data_connection.data_connection_ex.LocalData'
+  target_generator: 's2_target_generators.target_gen_ex.TargetGenSimple'
+  feat_eng: 's3_feature_eng.feat_eng_ex.FeatEngScaling'
+  model: 's4_models.model_ex.LinearReg'
   train_test_split: 'train_test_split.train_test_split_random'
   score_metric: 'sklearn.metrics.mean_squared_error'
 
-another_regression:
+feateng_regression:
   base_path: 'project.data_science.'
-  data_inteface: 's1_data_connection.local_data.LocalData'
-  target_generator: 's2_target_generators.target_gen_identity.TargetGenIdentity'
-  feat_eng: 's3_feature_eng.feat_eng_scaling.AnotherFeatEng'
-  model: 's4_models.linear_reg.LinearReg'
+  data_inteface: 's1_data_connection.data_connection_ex.LocalData'
+  target_generator: 's2_target_generators.target_gen_ex.TargetGenSimple'
+  feat_eng: 's3_feature_eng.feat_eng_ex.FeatEngAddColumns'
+  model: 's4_models.model_ex.LinearReg'
+  train_test_split: 'train_test_split.train_test_split_random'
+  score_metric: 'sklearn.metrics.mean_squared_error'
+
+simple_regression:
+  base_path: 'project.data_science.'
+  data_inteface: 's1_data_connection.data_connection_ex.LocalData'
+  target_generator: 's2_target_generators.target_gen_ex.TargetGenSimple'
+  feat_eng: 's3_feature_eng.feat_eng_ex.FeatEngIdentity'
+  model: 's4_models.model_ex.LinearReg'
   train_test_split: 'train_test_split.train_test_split_random'
   score_metric: 'sklearn.metrics.mean_squared_error'
