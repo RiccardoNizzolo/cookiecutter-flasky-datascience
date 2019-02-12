@@ -39,13 +39,13 @@ pipeline {
                 timeout(20) {
                     waitUntil {
                        script {
-                         def r = sh script: 'wget -q http://docker_{{cookiecutter.short_app_name}}-model-builder_1:5000', returnStatus: true
+                         def r = sh script: 'wget -q http://docker_{{cookiecutter.short_app_name}}-model-builder_1:5000/models', returnStatus: true
                          return (r == 0);
                        }
                     }
                 }
-                sh 'docker commit docker_model-builder_1 {{cookiecutter.short_app_name}}webprod:latest'
-                sh 'docker container stop $( docker ps -q --filter="name=model-builder*")'
+                sh 'docker commit docker_{{cookiecutter.short_app_name}}-model-builder_1 {{cookiecutter.short_app_name}}webprod:latest'
+                sh 'docker container stop $( docker ps -q --filter="name={{cookiecutter.short_app_name}}-model-builder*")'
 
             }
 
@@ -61,7 +61,7 @@ pipeline {
                 timeout(20) {
                     waitUntil {
                        script {
-                         def r = sh script: 'wget -q http://docker_{{cookiecutter.short_app_name}}-model-app_1:5000', returnStatus: true
+                         def r = sh script: 'wget -q http://docker_{{cookiecutter.short_app_name}}-model-app_1:5000/models', returnStatus: true
                          return (r == 0);
                        }
                     }

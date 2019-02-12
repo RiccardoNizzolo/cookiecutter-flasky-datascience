@@ -13,7 +13,7 @@ another_regression:
   base_path: 'project.data_science.'
   data_inteface: 's1_data_connection.local_data.LocalData'
   target_generator: 's2_target_generators.target_gen_identity.TargetGenIdentity'
-  feat_eng: 's3_feature_eng.feat_eng_scaling.ScalingFeatEng'
+  feat_eng: 's3_feature_eng.feat_eng_scaling.AnotherFeatEng'
   model: 's4_models.linear_reg.LinearReg'
   train_test_split: 'train_test_split.train_test_split_random'
   score_metric: 'sklearn.metrics.mean_squared_error'
