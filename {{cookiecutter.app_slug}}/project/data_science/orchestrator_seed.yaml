@@ -9,11 +9,11 @@ simple_regression:
   train_test_split: 'train_test_split.train_test_split_random'
   score_metric: 'sklearn.metrics.mean_squared_error'
 
-prime_numbers:
+another_regression:
   base_path: 'project.data_science.'
-  data_inteface: 's1_data_connection.vertica_db_data.VerticaDbData'
-  target_generator: 's2_target_generators.prime_target_gen.PrimeTargetGen'
-  feat_eng: 's3_feature_eng.feat_eng_prime.PrimeFeatEng'
-  model: 's4_models.logistic_reg.lightClass'
+  data_inteface: 's1_data_connection.local_data.LocalData'
+  target_generator: 's2_target_generators.target_gen_identity.TargetGenIdentity'
+  feat_eng: 's3_feature_eng.feat_eng_scaling.ScalingFeatEng'
+  model: 's4_models.linear_reg.LinearReg'
   train_test_split: 'train_test_split.train_test_split_random'
-  score_metric: 'sklearn.metrics.roc_auc_score'
+  score_metric: 'sklearn.metrics.mean_squared_error'
