@@ -1,4 +1,8 @@
 #{{cookiecutter.app_name}}
+you have three options:
+- use Docker and Jenkins
+- use only Docker
+- stay traditional
 
 ## Getting Started with Jenkis and Docker
 ### If you have a Jenkins server
